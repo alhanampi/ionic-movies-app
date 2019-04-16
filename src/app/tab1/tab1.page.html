@@ -1,0 +1,43 @@
+<ion-content>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col>
+        <h3>Películas</h3>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <app-slideshow-backdrop [peliculas]="peliculasRecientes"></app-slideshow-backdrop>
+
+  <h3>Cartelera</h3>
+  <app-slideshow-poster [peliculas]="peliculasRecientes"></app-slideshow-poster>
+
+
+  <ion-grid fixed>
+      <ion-row>
+        <ion-col>
+          <h3>Populares</h3>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  
+
+  <app-slideshow-pares 
+  [peliculas]="popular"
+  (cargarMas)="cargarMas()"
+
+  >
+</app-slideshow-pares>
+
+
+  <!-- estos slides se van al componente slideshow-->
+  <!-- <ion-slides [options]="slidesOpts">
+  <ion-slide *ngFor="let pelicula of peliculasRecientes">
+ <ion-card>
+   <img [src]="pelicula.backdrop_path | imagen"> <!--imagen es el nombre del pipe que creé
+ </ion-card>
+  </ion-slide>
+</ion-slides> -->
+
+</ion-content>

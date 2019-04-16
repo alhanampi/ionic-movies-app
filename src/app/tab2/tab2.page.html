@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Buscar Película
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-toolbar>
+  <ion-searchbar placeholder="Buscar películas" animated debounce="700" [value]="textoBuscar"
+    (ionChange)="buscar($event)"></ion-searchbar>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-grid *ngIf="buscando"> <!--buscando así sin parentesis no es una funcion, sino una propiedad del componente, se declara en los export-->
+    <ion-row>
+      <ion-col text-center>
+        <ion-spinner name="crescent"></ion-spinner>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="!peliculas.length > 0">
+    <!--oculto este list si ya se están mostrando peliculas-->
+    <ion-list-header>
+      <ion-label>Sugerencias</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let idea of ideas" (click)="textoBuscar = idea">
+      <!-- solo con apretar la sugerencia la pone en la barra de buscar-->
+      <ion-label color="primary">{{idea}}</ion-label>
+    </ion-item>
+
+  </ion-list>
+
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="6" *ngFor="let pelicula of peliculas">
+        <!-- la dejo de 6 así se ponen una al lado de otra cuando las cree -->
+        <ion-card  (click)="verDetalle(pelicula.id)">
+          <img [src]="pelicula.poster_path | imagen">
+          <!--no hay que olvidar el pipe, y hay que importarlo en el module-->
+          <ion-card-header>
+            <ion-card-subtitle>{{pelicula.release_date}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <h2>{{pelicula.title}}</h2>
+          </ion-card-content>
+        </ion-card>
+
+      </ion-col>
+
+    </ion-row>
+  </ion-grid>
+
+</ion-content>
